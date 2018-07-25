@@ -1,0 +1,51 @@
+version: "3"
+services:
+
+  # APP
+  dummyservice:
+    build:
+      context: ./dummy-service
+      dockerfile: Dockerfile
+    image: dummyservice
+    environment:
+    - SPRING_ACTIVE_PROFILES=chaos-monkey
+    ports:
+    - 8080:8080
+    network_mode: bridge
+
+  # MONITORING
+  prometheus:
+    image: prom/prometheus
+    volumes:
+    - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+    - 9090:9090
+    links:
+    - dummyservice:dummyservice
+    network_mode: bridge
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+    - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+    - ./monitoring/grafana/config.ini:/etc/grafana/config.ini
+    - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+    - 3000:3000
+    links:
+    - prometheus:prometheus
+    depends_on:
+    - prometheus
+    network_mode: bridge
+
+  # LOAD TEST/GENERATOR
+  loadtest:
+    build:
+      context: ./performance-test
+      dockerfile: Dockerfile
+    image: loadtest
+    links:
+    - dummyservice:dummyservice
+    depends_on:
+      - dummyservice
+    network_mode: bridge
