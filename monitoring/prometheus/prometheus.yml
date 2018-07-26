@@ -9,3 +9,13 @@ scrape_configs:
   - targets: ['dummyservice:8080']
     labels:
       application: dummyservice
+
+rule_files:
+- "/etc/prometheus/alerts.yml"
+
+alerting:
+  alertmanagers:
+  - scheme: http
+    static_configs:
+    - targets:
+      - "alertmanager:9093"

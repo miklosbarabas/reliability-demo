@@ -1,0 +1,11 @@
+groups:
+- name: dummy-alerts
+  rules:
+  - alert: p95over10ms
+    expr: histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{application="dummyservice", instance="dummyservice:8080", uri="/dummy"}[2m])) by (le)) > 10ms
+    for: 5s
+    labels:
+      severity: warning
+    annotations:
+      description: 'p95 = {{ $value }}% > 10 ms.'
+      summary: p95 is over 10ms!

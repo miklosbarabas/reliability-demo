@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 5373,
   "graphTooltip": 0,
-  "iteration": 1532345769126,
+  "iteration": 1532625836655,
   "links": [],
   "panels": [
     {
@@ -492,7 +492,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{application=\"$application\", instance=\"$instance\"}[1m])) by (le))",
+          "expr": "histogram_quantile(0.99, sum(rate(http_server_requests_seconds_bucket{application=\"dummyservice\", instance=\"dummyservice:8080\", uri=\"/dummy\"}[2m])) by (le))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -500,21 +500,21 @@
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{application=\"$application\", instance=\"$instance\"}[1m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{application=\"dummyservice\", instance=\"dummyservice:8080\", uri=\"/dummy\"}[2m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "95%",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.75, sum(rate(http_server_requests_seconds_bucket{application=\"$application\", instance=\"$instance\"}[1m])) by (le))",
+          "expr": "histogram_quantile(0.75, sum(rate(http_server_requests_seconds_bucket{application=\"dummyservice\", instance=\"dummyservice:8080\", uri=\"/dummy\"}[2m])) by (le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "75%",
           "refId": "C"
         },
         {
-          "expr": "rate(http_server_requests_seconds_sum{application=\"$application\", instance=\"$instance\"}[1m])/rate(http_server_requests_seconds_count{application=\"$application\", instance=\"$instance\"}[1m])",
+          "expr": "rate(http_server_requests_seconds_sum{application=\"dummyservice\", instance=\"dummyservice:8080\", uri=\"/dummy\"}[2m])/rate(http_server_requests_seconds_count{application=\"dummyservice\", instance=\"dummyservice:8080\", uri=\"/dummy\"}[2m])",
           "format": "time_series",
           "hide": false,
           "instant": false,

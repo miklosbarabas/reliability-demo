@@ -1,7 +1,7 @@
 # Reliability demo
 
 This project was developed to demonstrate a Spring application using Micrometer.io and monitored with Prometheus and Grafana.
-To showcase some of the features the application is using Spring Chaos Monkey* and a load-generator is created using Gatling. 
+To showcase some of the features the application is using Spring Chaos Monkey[*](https://github.com/miklosbarabas/reliability-demo#chaos-monkey) and a load-generator is created using Gatling. 
 Grafana dashboards are provisioned to visualize the metrics collected by Prometheus.
 
 ## Getting started
@@ -34,7 +34,8 @@ You must have [docker](https://docs.docker.com/) & [docker-compose](https://docs
   - the application API: http://localhost:8080/dummy
   - Swagger API documentation: http://localhost:8080/swagger-ui.html
   - Prometheus: http://localhost:9090
-  - Grafana: http://localhost:3000
+  - Prometheus - AlertManager: http://localhost:9093
+  - Grafana: http://localhost:3000 (admin/admin)
 
 
 ## Chaos Monkey
